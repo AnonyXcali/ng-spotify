@@ -10,13 +10,16 @@ import { routes } from './app.routes';
 import { SearchComponent } from './component/search/search.component';
 import { SpotifyService } from './services/spotify.service';
 import { ArtistComponent } from './component/artist/artist-component';
+import { AlbumComponent }  from './component/album/album-component';
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     AboutComponent,
     SearchComponent,
-    ArtistComponent
+    ArtistComponent,
+    AlbumComponent
   ],
   imports: [
     BrowserModule,

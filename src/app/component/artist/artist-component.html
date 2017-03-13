@@ -6,7 +6,7 @@
       <h1>{{artist.name}}</h1>
       <div *ngIf="artist.genres.length > 0">
          Genres : <span *ngFor ='let gen of artist.genres'>
-            {{gen}}
+            <span class="genre-stuff">{{gen}}</span>
          </span>
       </div>
   </header>
@@ -14,7 +14,13 @@
     <div class="row">
         <div *ngFor = "let alb of albums">
           <div class="col-md-3">
-            
+            <div class="well album">
+              <div *ngIf="alb.images.length > 0">
+                  <img src="{{alb.images[0].url}}" class="album-thumb img-thumbnail" alt="">
+                  <h4>{{alb.name}}</h4>
+                  <a  routerLink="/albums/{{alb.id}}" class="btn btn-default btn-block">Album Details</a>
+              </div>
+            </div>
           </div>
         </div>
     </div>
