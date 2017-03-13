@@ -3,6 +3,8 @@ import { SpotifyService } from '../../services/spotify.service';
 import { Artists } from '../../artists';
 import { Album } from '../../album';
 import { RouterModule } from '@angular/router';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'search',
@@ -22,6 +24,8 @@ export class SearchComponent {
 
   searchMusic(){
       this._spotifyService.searchMusic(this.searchStr)
+      .debounceTime(300)
+      .distinctUntilChanged()
         .subscribe(res =>{
           //console.log(res.artists.items);
           this.searchRes = res.artists.items;
@@ -29,3 +33,9 @@ export class SearchComponent {
 
   }
 }
+/*
+.subscribe(res =>{
+  //console.log(res.artists.items);
+  this.searchRes = res.artists.items;
+})
+*/

@@ -1,12 +1,15 @@
 <h1>Need Music?</h1>
-  <p>HAHA yes</p>
+  <p>This is ngSpotify!</p>
+  <p>Search for the artist you wish to view below</p>
 
+<section class="webdesigntuts-workshop">
 <form action="">
   <div class="form-group">
     <input type="text" name="searchStr" id="" [(ngModel)]="searchStr" (keyup)="searchMusic()" class="form-control" placeholder="Search Music">
-
+       <button>Search</button>
   </div>
 </form>
+</section>
 
 <div *ngIf="searchRes">
   <div *ngFor="let res of searchRes">

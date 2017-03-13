@@ -9,33 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
-import { ActivatedRoute } from '@angular/router';
-import 'rxjs/add/operator/switchMap';
-var AlbumComponent = (function () {
-    function AlbumComponent(_spotifyService, _route) {
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/debounceTime';
+var SearchComponent = (function () {
+    function SearchComponent(_spotifyService) {
         this._spotifyService = _spotifyService;
-        this._route = _route;
     }
-    AlbumComponent.prototype.ngOnInit = function () {
+    SearchComponent.prototype.searchMusic = function () {
         var _this = this;
-        this._route.params
-            .map(function (params) { return params['id']; })
-            .switchMap(function (id) { return _this._spotifyService.getAlbumUrl(id); })
-            .subscribe(function (albums) { return _this.albums = albums; });
+        this._spotifyService.searchMusic(this.searchStr)
+            .debounceTime(300)
+            .distinctUntilChanged()
+            .subscribe(function (res) {
+            _this.searchRes = res.artists.items;
+        });
     };
-    AlbumComponent.prototype.ngOnDestroy = function () {
-    };
-    return AlbumComponent;
+    return SearchComponent;
 }());
-AlbumComponent = __decorate([
+SearchComponent = __decorate([
     Component({
-        selector: 'album',
-        templateUrl: './album-component.html',
-        styleUrls: ['./album-component.css'],
+        selector: 'search',
+        templateUrl: './search.component.html',
+        styleUrls: ['./search.component.css'],
         providers: [SpotifyService]
     }),
-    __metadata("design:paramtypes", [SpotifyService,
-        ActivatedRoute])
-], AlbumComponent);
-export { AlbumComponent };
-//# sourceMappingURL=../../../../../src/app/component/album/album-component.js.map
+    __metadata("design:paramtypes", [SpotifyService])
+], SearchComponent);
+export { SearchComponent };
+//# sourceMappingURL=../../../../../src/app/component/search/search.component.js.map

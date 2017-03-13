@@ -1,4 +1,4 @@
-import { Component , OnInit } from '@angular/core';
+import { Component , OnInit ,OnDestroy } from '@angular/core';
 import { Album } from '../../album';
 import { Artists } from '../../artists';
 import { SpotifyService } from '../../services/spotify.service';
@@ -12,10 +12,11 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./album-component.css'],
   providers : [SpotifyService]
 })
-export class AlbumComponent implements OnInit {
+export class AlbumComponent implements OnInit, OnDestroy {
 
       id : string;
      albums : Album[];
+     artist : Artists[];
 
   constructor (
     private _spotifyService : SpotifyService,
@@ -28,6 +29,10 @@ export class AlbumComponent implements OnInit {
         .map( params => params['id'])
         .switchMap(id => this._spotifyService.getAlbumUrl(id))
         .subscribe( albums => this.albums = albums)
+  }
+
+  ngOnDestroy(){
+
   }
 
 }
