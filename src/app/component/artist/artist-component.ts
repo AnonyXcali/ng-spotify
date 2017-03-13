@@ -36,6 +36,11 @@ export class ArtistComponent implements OnInit{
            .map(params => params['id'])
            .switchMap(id => this._spotifyService.getArtist(id))
            .subscribe(artist => this.artist = artist);
+
+           this._route.params
+           .map(params => params['id'])
+           .switchMap(id => this._spotifyService.getAlbums(id))
+           .subscribe(albums => this.albums = albums.items);
     }
 
     /*

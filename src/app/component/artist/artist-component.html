@@ -6,8 +6,17 @@
       <h1>{{artist.name}}</h1>
       <div *ngIf="artist.genres.length > 0">
          Genres : <span *ngFor ='let gen of artist.genres'>
-            {{gen}}         
+            {{gen}}
          </span>
       </div>
   </header>
+  <div class="artist-albums">
+    <div class="row">
+        <div *ngFor = "let alb of albums">
+          <div class="col-md-3">
+            
+          </div>
+        </div>
+    </div>
+  </div>
 </div>
